@@ -44,7 +44,7 @@ export class BrandRepository extends Repository<Brand> {
 
     try {
       await brand.save();
-      this.logger.verbose(`Created the Brand w/ name: ${brand.name}`);
+      this.logger.verbose(`Created the Brand named ${brand.name}`);
       return brand;
     } catch (error) {
       if (error.code === '23505') {
