@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
+  ParseUUIDPipe,
   Post,
   Query,
   ValidationPipe,
@@ -33,5 +35,12 @@ export class BrandsController {
     @Body(ValidationPipe) createBrandDto: CreateBrandDto,
   ): Promise<Brand> {
     return this.brandsService.createBrand(createBrandDto);
+  }
+
+  @Delete('/:id')
+  deleteBrand(
+    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
+  ): Promise<void> {
+    return this.brandsService.deleteBrand(id);
   }
 }
