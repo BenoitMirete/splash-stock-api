@@ -10,7 +10,7 @@ export default class TypeOrmConfig {
     return {
       type: 'postgres',
       host: configService.get('DATABASE_HOST') || 'localhost',
-      port: configService.get('DATABASE_PORT') || 5432,
+      port: configService.get('DATABASE_PORT') || 5469,
       username: configService.get('DATABASE_USERNAME') || '***',
       password: configService.get('DATABASE_PASSWORD') || '***',
       database: configService.get('DATABASE_NAME') || '***',
