@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Query,
   ValidationPipe,
@@ -20,6 +21,11 @@ export class BrandsController {
     @Query(ValidationPipe) getBrandsFilterDto: GetBrandsFilterDto,
   ): Promise<Brand[]> {
     return this.brandsService.getBrands(getBrandsFilterDto);
+  }
+
+  @Get('/:slug')
+  getBrandBySlug(@Param('slug') slug: string): Promise<Brand> {
+    return this.brandsService.getBrandBySlug(slug);
   }
 
   @Post()
