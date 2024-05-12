@@ -5,6 +5,8 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmExModule } from './config/orm/typeorm-ex.module';
 import { typeOrmConfigAsync } from './config/typeorm.config';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -13,6 +15,8 @@ import { typeOrmConfigAsync } from './config/typeorm.config';
     TypeOrmExModule.forCustomRepository([]),
     CommonModule,
     BrandsModule,
+    UsersModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

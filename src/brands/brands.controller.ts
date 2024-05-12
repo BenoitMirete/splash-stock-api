@@ -1,16 +1,20 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
+  ParseUUIDPipe,
   Post,
   Query,
+  UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
 import { BrandsService } from './brands.service';
 import { GetBrandsFilterDto } from './dto/get-brands-filter.dto';
 import { Brand } from './orm/brand.entity';
 import { CreateBrandDto } from './dto/create-brand.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('brands')
 export class BrandsController {
@@ -29,9 +33,18 @@ export class BrandsController {
   }
 
   @Post()
+  @UseGuards(AuthGuard())
   createBrand(
     @Body(ValidationPipe) createBrandDto: CreateBrandDto,
   ): Promise<Brand> {
     return this.brandsService.createBrand(createBrandDto);
+  }
+
+  @Delete('/:id')
+  @UseGuards(AuthGuard())
+  deleteBrand(
+    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
+  ): Promise<void> {
+    return this.brandsService.deleteBrand(id);
   }
 }

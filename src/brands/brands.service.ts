@@ -29,4 +29,11 @@ export class BrandsService {
   async createBrand(createBrandDto: CreateBrandDto): Promise<Brand> {
     return this.brandRepository.createBrand(createBrandDto);
   }
+
+  async deleteBrand(id: string): Promise<void> {
+    const result = await this.brandRepository.delete({ id });
+    if (result.affected === 0) {
+      throw new NotFoundException(`Brand with id "${id}" does not exists`);
+    }
+  }
 }
